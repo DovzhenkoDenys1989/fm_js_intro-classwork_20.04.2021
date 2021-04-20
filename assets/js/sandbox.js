@@ -83,3 +83,66 @@ const {
 console.log(`Hight: ${hightValue}, Width: ${widthValue}`);
 
 console.log(monitor);
+
+
+const nums = [1, 2, 3, 4, 5, 6, 7, 8];
+
+/*
+const firstNumber = nums[0];
+const secondNumber = nums[1];
+*/
+
+const [firstNumber, secondNumber, thirdNumber, ...restOfNums] = nums;
+
+console.log(firstNumber, secondNumber, thirdNumber, restOfNums);
+
+/*
+  Напишите ф-ю, которая принимает объект, 
+  с помощью деструктуризации 2 его свойства помещает в переменные,
+  а остальные свойства этого объекта с помощью rest оператора 
+  сохраняет в отдельный объект.
+  После этого свойства объекта и остаточный объект выводятся в консоль.
+*/
+
+function restFunc(
+  {
+    sizes: {
+      height: { value:newValue, scale:newScale },
+    },
+    dpi: newDpi,
+  },
+  ...value
+) {
+  return `${newValue}${newScale}\n${newDpi}`;
+}
+console.log(restFunc(monitor));
+
+/*
+  Напишите ф-ю getMonitorInfo, которая принимает объект с информацией о мониторе
+  С помощью деструктуризации получает свойства color, dpi, width, height
+  и возвращает строку с информацией о мониторе.
+  Color: black,
+  DPI: 100,
+  Width: 58.6 cm
+  Height: 27.3 cm
+*/
+
+function getMonitorInfo({
+  sizes: {
+    height: { 
+      value: heightValue, 
+      scale: heightScale,
+    },
+    width: { 
+      value: widthValue, 
+      scale: widthScale,
+    },
+  },
+  color,
+  dpi,
+  ...otherInfo
+}) {
+  console.log(otherInfo);
+  return `Color: ${color}\nDPI: ${dpi}\nWidth: ${widthValue} ${widthScale}\nHeight: ${heightValue} ${heightScale}`;
+}
+console.log(getMonitorInfo(monitor));
